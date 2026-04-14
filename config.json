@@ -1,5 +1,4 @@
 {
-  "businessName": "Sherwood Nurseries",
   "phone": "587-409-4442",
   "email": "info@sherwoodnurseries.ca",
   "address": "22040 Township Rd 522, Sherwood Park, AB",
@@ -9,14 +8,8 @@
   "hours": {
     "monday": "Closed",
     "tuesdayToFriday": "9 AM - 5 PM",
-    "saturday": "10 AM - 5 PM",
-    "sunday": "Closed"
+    "saturday": "10 AM - 5 PM"
   },
   "seasonNote": "Currently CLOSED for the season",
-  "holidayMessage": "",
-  "priceListUrl": "docs/price-list.pdf",
-  "plantFinderUrl": "http://plants.sherwoodnurseries.ca/11050022/",
-  "contactFormEndpoint": "https://formspree.io/f/YOUR_FORM_ID",
-  "googleTagManagerId": "GTM-WVML4PT4",
-  "googleAnalyticsId": "G-Y67TJ7PEQ0"
+  "holidayMessage": ""
 }
