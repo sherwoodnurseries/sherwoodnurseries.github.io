@@ -7,13 +7,13 @@
 
   /* ── 1. Config Loader ──────────────────────────────────── */
   function loadConfig() {
-    // Config is embedded inline via <script> as window.siteConfig
-    // Also try fetching config.json as override (works on web servers)
-    if (window.siteConfig) {
-      applyAll(window.siteConfig);
+    // XHR requires HTTP/HTTPS — blocked on file:// by browser security policy.
+    // For local dev run:  python3 -m http.server 8080  then open localhost:8080
+    // On GitHub Pages this fetch works fine — config.json is the single source of truth.
+    if (window.location.protocol === 'file:') {
+      console.warn('[Sherwood] Config not loaded: open via a local server, not file://.\n  Run: python3 -m http.server 8080');
+      return;
     }
-
-    // Also try remote config.json (allows override without editing HTML)
     var scripts = document.querySelectorAll('script[src*="main.js"]');
     var basePath = '';
     if (scripts.length) {
