@@ -33,6 +33,7 @@
     window._cfg = cfg;
     applyConfig(cfg);
     applyHolidayBanner(cfg);
+    applyPromoMessage(cfg);
     renderHoursFooter(cfg);
   }
 
@@ -121,6 +122,18 @@
       html += '<p>' + label + ': ' + h + '</p>';
     }
     containers.forEach(function (el) { el.innerHTML = html; });
+  }
+
+  function applyPromoMessage(cfg) {
+    if (cfg.promoMessage && cfg.promoMessage.trim() !== '') {
+      var bar = document.createElement('div');
+      bar.className = 'promo-banner visible';
+      bar.textContent = cfg.promoMessage;
+      var header = document.getElementById('site-header');
+      if (header) {
+        header.appendChild(bar);
+      }
+    }
   }
 
   function applyHolidayBanner(cfg) {

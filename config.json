@@ -14,6 +14,7 @@
     "saturday": "10 AM - 5 PM",
     "sunday": "Closed"
   },
-  "seasonNote": "Opening May 8,2026",
-  "holidayMessage": ""
+  "seasonNote": "Opening May 8, 2026",
+  "holidayMessage": "",
+  "promoMessage": ""
 }
