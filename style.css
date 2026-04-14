@@ -77,6 +77,13 @@ input, textarea, select { font-family: inherit; }
 }
 .holiday-banner.visible { display: block; }
 
+/* ── 6. Header — Sticky Wrapper ──────────────────────────── */
+#site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 /* ── 6. Header — Top Bar ──────────────────────────────────── */
 .header-topbar {
   background: var(--beige);
@@ -100,9 +107,6 @@ input, textarea, select { font-family: inherit; }
 /* ── 7. Header — Nav Bar ──────────────────────────────────── */
 .header-nav {
   background: var(--white);
-  position: sticky;
-  top: 0;
-  z-index: 999;
   border-bottom: 1px solid rgba(0,0,0,0.08);
   transition: box-shadow var(--transition);
 }
@@ -301,22 +305,33 @@ input, textarea, select { font-family: inherit; }
 .plant-name strong { font-weight: 700; display: block; }
 .plant-desc { font-size: 14px; color: var(--body-text); line-height: 1.6; }
 
-/* ── 10. About Section ────────────────────────────────────── */
-.about-section {
+/* ── 10. Shared: Green Section Overlay ────────────────────── */
+.green-section {
   position: relative;
   background: var(--green-dark);
   overflow: hidden;
 }
-.about-section::before {
+.green-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('img/bg-illustration.jpg') center/cover no-repeat;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.green-section::after {
   content: '';
   position: absolute;
   inset: 0;
   background: url('img/leafs-pattern.png') center/cover no-repeat;
-  opacity: 0.18;
+  opacity: 0.5;
   pointer-events: none;
 }
+
+/* ── 10. About Section ────────────────────────────────────── */
 .about-inner {
   position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 2fr 3fr;
   min-height: 420px;
@@ -420,26 +435,7 @@ input, textarea, select { font-family: inherit; }
 
 /* ── 14. Testimonials ─────────────────────────────────────── */
 .testimonials-section {
-  position: relative;
-  background: var(--green-dark);
-  overflow: hidden;
   padding: 80px 0;
-}
-.testimonials-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('img/bg-illustration.jpg') center/cover no-repeat;
-  opacity: 0.2;
-  pointer-events: none;
-}
-.testimonials-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('img/leafs-pattern.png') center/cover no-repeat;
-  opacity: 0.5;
-  pointer-events: none;
 }
 .testimonials-inner {
   position: relative;
@@ -568,18 +564,7 @@ input, textarea, select { font-family: inherit; }
 
 /* ── 19. Page Hero (inner pages) ──────────────────────────── */
 .page-hero {
-  background: var(--green-dark);
-  position: relative;
-  overflow: hidden;
   padding: 60px 0;
-}
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('img/leafs-pattern.png') center/cover no-repeat;
-  opacity: 0.12;
-  pointer-events: none;
 }
 .page-hero .container { position: relative; z-index: 2; }
 .page-hero .two-col { align-items: center; }
@@ -691,17 +676,6 @@ figcaption {
 /* ── 23. Services ─────────────────────────────────────────── */
 .services-hero {
   padding: 70px 0;
-  background: var(--green-dark);
-  position: relative;
-  overflow: hidden;
-}
-.services-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('img/leafs-pattern.png') center/cover no-repeat;
-  opacity: 0.12;
-  pointer-events: none;
 }
 .services-hero .container { position: relative; z-index: 2; }
 .services-hero h1 { color: var(--white); font-size: clamp(1.8rem, 3vw, 2.6rem); }
@@ -742,15 +716,6 @@ figcaption {
 .services-message h2 { font-size: 24px; color: var(--green-dark); margin-bottom: 24px; font-weight: 700; }
 
 /* ── 24. Contact ──────────────────────────────────────────── */
-.contact-hero { background: var(--green-dark); position: relative; overflow: hidden; }
-.contact-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('img/leafs-pattern.png') center/cover no-repeat;
-  opacity: 0.12;
-  pointer-events: none;
-}
 .contact-section { padding: 70px 0; background: var(--white); }
 .contact-grid {
   display: grid;
@@ -898,8 +863,8 @@ figcaption {
   .footer-col iframe { height: 180px; }
   .considerations-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
 
-  .topbar-items { gap: 8px; font-size: 11px; }
-  .topbar-items li:last-child { display: none; }
+  .topbar-items { gap: 8px; }
+  .topbar-items li, .topbar-items a { font-size: 11px; }
   .header-topbar { min-height: 40px; }
 
   .delivery-grid { grid-template-columns: 1fr; }
@@ -930,7 +895,7 @@ figcaption {
   .considerations-grid { grid-template-columns: 1fr; }
 
   .topbar-items { justify-content: center; }
-  .topbar-items li:nth-child(3) { display: none; }
+  .topbar-items li, .topbar-items a { font-size: 10px; }
 
   .nav-logo img { width: 120px; }
 

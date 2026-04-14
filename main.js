@@ -33,6 +33,7 @@
     window._cfg = cfg;
     applyConfig(cfg);
     applyHolidayBanner(cfg);
+    renderHoursFooter(cfg);
   }
 
   function getNestedValue(obj, keyPath) {
@@ -94,6 +95,32 @@
         a.href = cfg.instagramUrl;
       });
     }
+  }
+
+  /* Build grouped hours HTML from per-day config */
+  function renderHoursFooter(cfg) {
+    var containers = document.querySelectorAll('[data-hours-list]');
+    if (!containers.length || !cfg.hours) return;
+    var order  = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+    var labels = {
+      monday:'Monday', tuesday:'Tuesday', wednesday:'Wednesday',
+      thursday:'Thursday', friday:'Friday', saturday:'Saturday', sunday:'Sunday'
+    };
+    var html = '';
+    var i = 0;
+    while (i < order.length) {
+      var day = order[i];
+      if (!cfg.hours[day]) { i++; continue; }
+      var h = cfg.hours[day];
+      var start = i;
+      while (i < order.length && cfg.hours[order[i]] === h) { i++; }
+      var end = i - 1;
+      var label = (start === end)
+        ? labels[order[start]]
+        : labels[order[start]] + ' \u2013 ' + labels[order[end]];
+      html += '<p>' + label + ': ' + h + '</p>';
+    }
+    containers.forEach(function (el) { el.innerHTML = html; });
   }
 
   function applyHolidayBanner(cfg) {
@@ -207,11 +234,9 @@
 
   /* ── 6. Sticky Header ──────────────────────────────────── */
   function initStickyHeader() {
-    var topbar = document.querySelector('.header-topbar');
     var nav = document.getElementById('main-nav');
     if (!nav) return;
-    var topbarH = topbar ? topbar.offsetHeight : 50;
-    function onScroll() { nav.classList.toggle('is-sticky', window.scrollY > topbarH); }
+    function onScroll() { nav.classList.toggle('is-sticky', window.scrollY > 0); }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
