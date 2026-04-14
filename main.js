@@ -117,6 +117,7 @@
     nav.querySelectorAll('.nav-menu a').forEach(function (link) {
       link.addEventListener('click', function () {
         if (window.innerWidth <= 1024) {
+          if (link.parentElement.classList.contains('has-dropdown')) return;
           nav.classList.remove('nav-open');
           toggle.setAttribute('aria-expanded', 'false');
         }
