@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sherwood Nurseries Plant Finder - Sherwood Park, Alberta</title>
-  <meta name="description" content="Use the Sherwood Nurseries Plant Finder tool to search our full inventory of trees, shrubs, and perennials available in Sherwood Park, Alberta.">
+  <title>Plant Finder | Sherwood Nurseries – Sherwood Park, Alberta</title>
+  <meta name="description" content="Search our full inventory of trees, shrubs, and perennials. Filter by category, size, colour, and growing conditions to find the perfect plant for your yard.">
   <link rel="icon" href="img/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,14 +12,181 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Alata&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <!-- NetPS Plant Finder Styles -->
-  <link href="https://plants.sherwoodnurseries.ca/11050022/Style/CSSOverwritePre" rel="stylesheet" type="text/css">
-  <link href="https://plants.sherwoodnurseries.ca/Content/NetPS.css" rel="stylesheet" type="text/css">
-  <link href="https://plants.sherwoodnurseries.ca/11050022/Style/DynamicText" rel="stylesheet" type="text/css">
-  <link href="https://plants.sherwoodnurseries.ca/11050022/Style/DynamicLayout" rel="stylesheet" type="text/css">
-  <link href="https://plants.sherwoodnurseries.ca/11050022/Style/CSSOverwritePost" rel="stylesheet" type="text/css">
-  <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WVML4PT4');</script>
+  <style>
+    /* ── Plant Finder ──────────────────────────────────────── */
+    .pf-section { padding: 60px 0; }
+
+    .pf-card {
+      background: var(--beige);
+      border-radius: 8px;
+      padding: 40px;
+    }
+
+    .pf-layout {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Sub-headings inside the form */
+    .pf-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--green-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--green-primary);
+      margin: 0 0 16px;
+    }
+
+    /* Keyword search */
+    .pf-keyword { margin-bottom: 32px; }
+    .pf-text-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 4px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      color: var(--secondary-text);
+      background: var(--white);
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .pf-text-input:focus { outline: none; border-color: var(--green-primary); }
+    .pf-text-input::placeholder { color: #bbb; font-size: 13px; }
+
+    /* Category checkboxes */
+    #NetPS-SearchTypeWorkspace {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .NetPS-SearchType {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 6px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      color: var(--secondary-text);
+      transition: background 0.15s;
+    }
+    .NetPS-SearchType:hover { background: rgba(71,163,93,0.09); }
+    .NetPS-SearchType input[type="checkbox"] {
+      accent-color: var(--green-primary);
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      cursor: pointer;
+      margin: 0;
+    }
+    .NetPS-SearchType label {
+      font-size: 12.5px;
+      color: var(--secondary-text);
+      cursor: pointer;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    /* Characteristics column */
+    .pf-field { margin-bottom: 14px; }
+    .pf-field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--secondary-text);
+      margin-bottom: 5px;
+    }
+    .pf-field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pf-ctrl {
+      padding: 8px 10px;
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 4px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      color: var(--secondary-text);
+      background: var(--white);
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .pf-ctrl:focus { outline: none; border-color: var(--green-primary); }
+    .pf-ctrl-full { width: 100%; }
+    .pf-ctrl-sm   { width: 64px; flex-shrink: 0; text-align: center; }
+    select.pf-ctrl { cursor: pointer; }
+
+    .pf-dim {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--secondary-text);
+    }
+    .pf-dim input[type="radio"] { accent-color: var(--green-primary); cursor: pointer; margin: 0; }
+    .pf-dim label { cursor: pointer; }
+
+    /* Submit bar */
+    .pf-submit {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    #NetPSReset {
+      padding: 10px 22px;
+      background: transparent;
+      color: var(--secondary-text);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid rgba(0,0,0,0.18);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    #NetPSReset:hover { border-color: var(--green-primary); color: var(--green-primary); }
+    #NetPSSubmit {
+      padding: 12px 36px;
+      background: var(--green-primary);
+      color: var(--white);
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    #NetPSSubmit:hover { background: var(--green-dark); }
+
+    /* Footer note */
+    .pf-note { margin-top: 18px; text-align: center; font-size: 13px; color: var(--body-text); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .pf-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
+      #NetPS-SearchTypeWorkspace { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .pf-card { padding: 24px 16px; }
+      .pf-layout { grid-template-columns: 1fr; gap: 28px; }
+      #NetPS-SearchTypeWorkspace { grid-template-columns: repeat(2, 1fr); }
+      .pf-submit { flex-direction: row; }
+      #NetPSReset, #NetPSSubmit { flex: 1; }
+    }
+  </style>
 </head>
 <body>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVML4PT4" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -61,7 +228,7 @@
               <li><a href="#">Please Call For Tree Prices &amp; Inventory</a></li>
             </ul>
           </li>
-          <li><a href="http://plants.sherwoodnurseries.ca/11050022/" target="_blank">Plant Finder Tool</a></li>
+          <li><a href="plant-finder.html">Plant Finder Tool</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <div class="nav-cta">
@@ -72,27 +239,339 @@
   </header>
 
   <main>
-    <div class="plant-finder-wrapper">
-      <h1>Plant Finder</h1>
-      <p style="margin-bottom:2rem;color:#54595F;">Search our full plant inventory below. Use the filters to find the perfect plant for your yard.</p>
 
-      <!-- NetPS Plant Finder Embed -->
-      <div id="pageMaster" style="width:100%;">
-        <iframe
-          src="http://plants.sherwoodnurseries.ca/11050022/"
-          width="100%"
-          height="900"
-          style="border:none;border-radius:5px;box-shadow:0 2px 16px rgba(0,0,0,0.08);"
-          title="Sherwood Nurseries Plant Finder"
-          loading="lazy"
-          allowfullscreen>
-        </iframe>
+    <section class="page-hero green-section">
+      <div class="container">
+        <div class="two-col">
+          <div class="col-image">
+            <img src="img/nursery-worker.jpg" alt="Sherwood Nurseries plant inventory" loading="lazy">
+          </div>
+          <div class="col-text">
+            <h1>Plant <strong>Finder Tool</strong></h1>
+            <p>Search our full inventory of trees, shrubs, perennials and more. Filter by category, size, colour, and growing conditions to find exactly what your yard needs.</p>
+            <a href="https://plants.sherwoodnurseries.ca/11050022/List" target="_blank" rel="noopener" class="btn btn-amber">View All Plants</a>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <p style="margin-top:1.5rem;font-size:13px;color:#7A7A7A;">
-        Can't see the plant finder? <a href="http://plants.sherwoodnurseries.ca/11050022/" target="_blank" rel="noopener">Open it directly</a>.
-      </p>
-    </div>
+    <section class="pf-section">
+      <div class="container">
+
+        <form action="https://plants.sherwoodnurseries.ca/11050022/Results" method="get" name="NetPSSearchForm" id="NetPSSearchForm">
+          <div class="pf-card">
+            <div class="pf-layout">
+
+              <!-- ── Left: keyword + categories ────────────── -->
+              <div>
+                <div class="pf-keyword">
+                  <label class="pf-label" for="NetPS-KeywordInput">Search by Name</label>
+                  <input class="pf-text-input" type="text" name="Keyword" id="NetPS-KeywordInput"
+                         placeholder="e.g. maple, hydrangea, spruce&hellip;">
+                </div>
+
+                <div>
+                  <span class="pf-label">Filter by Category</span>
+                  <div id="NetPS-SearchTypeWorkspace">
+
+                    <div id="UICat-Any" class="NetPS-SearchType">
+                      <input type="checkbox" name="CatAny" value="True" checked id="CatAny"
+                             onclick="javascript:clearCat();">
+                      <label for="CatAny">Any</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattree" value="True" id="Cattree"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattree">Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattrde" value="True" id="Cattrde"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattrde">Deciduous Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattrsh" value="True" id="Cattrsh"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattrsh">Shade Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattrev" value="True" id="Cattrev"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattrev">Evergreen Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattrfl" value="True" id="Cattrfl"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattrfl">Flowering Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattror" value="True" id="Cattror"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattror">Ornamental Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catshru" value="True" id="Catshru"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catshru">Shrub</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catshde" value="True" id="Catshde"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catshde">Deciduous Shrub</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catshev" value="True" id="Catshev"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catshev">Evergreen Shrub</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catshdc" value="True" id="Catshdc"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catshdc">Dwarf Conifer</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catshhe" value="True" id="Catshhe"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catshhe">Hedge Shrub</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catrose" value="True" id="Catrose"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catrose">Rose</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catrhod" value="True" id="Catrhod"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catrhod">Rhododendron &amp; Azalea</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Cattrgr" value="True" id="Cattrgr"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Cattrgr">Top-Grafted Standard</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catgrco" value="True" id="Catgrco"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catgrco">Ground Cover</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catpere" value="True" id="Catpere"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catpere">Perennial</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catpesl" value="True" id="Catpesl"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catpesl">Sun-Loving Perennial</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catpest" value="True" id="Catpest"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catpest">Shade-Tolerant Perennial</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catvine" value="True" id="Catvine"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catvine">Vine</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catfern" value="True" id="Catfern"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catfern">Fern</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catorgr" value="True" id="Catorgr"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catorgr">Ornamental Grass</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catedib" value="True" id="Catedib"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catedib">Edible</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catetfr" value="True" id="Catetfr"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catetfr">Fruit Tree</label>
+                    </div>
+
+                    <div class="NetPS-SearchType">
+                      <input type="checkbox" name="Catesfb" value="True" id="Catesfb"
+                             onclick="javascript:document.getElementById('CatAny').checked=false;">
+                      <label for="Catesfb">Fruit &amp; Berry Shrub</label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <!-- ── Right: characteristics ─────────────────── -->
+              <div id="NetPS-SFWorkspace1">
+                <span class="pf-label">Filter by Characteristics</span>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="Height">Height</label>
+                  <div class="pf-field-row">
+                    <input class="pf-ctrl pf-ctrl-sm" type="text" name="Height" id="Height"
+                           value="Any" maxlength="3"
+                           onfocus="if(this.value==='Any')this.value='';"
+                           onblur="if(this.value==='')this.value='Any';">
+                    <span class="pf-dim">
+                      <input type="radio" name="HeightDim" value="inches" id="HeightDim1">
+                      <label for="HeightDim1">in</label>
+                      <input type="radio" name="HeightDim" value="feet" checked id="HeightDim2">
+                      <label for="HeightDim2">ft</label>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="Spread">Spread</label>
+                  <div class="pf-field-row">
+                    <input class="pf-ctrl pf-ctrl-sm" type="text" name="Spread" id="Spread"
+                           value="Any" maxlength="3"
+                           onfocus="if(this.value==='Any')this.value='';"
+                           onblur="if(this.value==='')this.value='Any';">
+                    <span class="pf-dim">
+                      <input type="radio" name="SpreadDim" value="inches" id="SpreadDim1">
+                      <label for="SpreadDim1">in</label>
+                      <input type="radio" name="SpreadDim" value="feet" checked id="SpreadDim2">
+                      <label for="SpreadDim2">ft</label>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="FlowerColor">Flower Colour</label>
+                  <select class="pf-ctrl pf-ctrl-full" name="FlowerColor" id="FlowerColor"
+                    onchange="if(typeof colorSelect!=='undefined')colorSelect.selectPalette(document.NetPSSearchForm.FlowerColor,document.NetPSSearchForm.FlowerColor.value,document.NetPSSearchForm.FlowerColorJS);">
+                    <option value="" selected>—</option>
+                    <option value="any">Any Colour</option>
+                    <option value="white">White</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="pink">Pink</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="green">Green</option>
+                    <option value="purple">Purple</option>
+                    <option value="blue">Blue</option>
+                    <option value="brown">Brown</option>
+                    <option value="black">Black</option>
+                  </select>
+                  <input type="hidden" name="FlowerColorJS" id="FlowerColorJS" value="">
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="FoliageType">Foliage Type</label>
+                  <select class="pf-ctrl pf-ctrl-full" name="FoliageType" id="FoliageType">
+                    <option value="" selected>—</option>
+                    <option value="False">Deciduous</option>
+                    <option value="True">Evergreen</option>
+                  </select>
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="FoliageColor">Foliage Colour</label>
+                  <select class="pf-ctrl pf-ctrl-full" name="FoliageColor" id="FoliageColor"
+                    onchange="if(typeof colorSelect!=='undefined')colorSelect.selectPalette(document.NetPSSearchForm.FoliageColor,document.NetPSSearchForm.FoliageColor.value,document.NetPSSearchForm.FoliageColorJS);">
+                    <option value="" selected>—</option>
+                    <option value="any">Any Colour</option>
+                    <option value="white">White</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="pink">Pink</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="green">Green</option>
+                    <option value="purple">Purple</option>
+                    <option value="blue">Blue</option>
+                    <option value="brown">Brown</option>
+                    <option value="black">Black</option>
+                  </select>
+                  <input type="hidden" name="FoliageColorJS" id="FoliageColorJS" value="">
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="FallColor">Fall Colour</label>
+                  <select class="pf-ctrl pf-ctrl-full" name="FallColor" id="FallColor"
+                    onchange="if(typeof colorSelect!=='undefined')colorSelect.selectPalette(document.NetPSSearchForm.FallColor,document.NetPSSearchForm.FallColor.value,document.NetPSSearchForm.FallColorJS);">
+                    <option value="" selected>—</option>
+                    <option value="any">Any Colour</option>
+                    <option value="white">White</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="pink">Pink</option>
+                    <option value="red">Red</option>
+                    <option value="orange">Orange</option>
+                    <option value="green">Green</option>
+                    <option value="purple">Purple</option>
+                    <option value="blue">Blue</option>
+                    <option value="brown">Brown</option>
+                    <option value="black">Black</option>
+                  </select>
+                  <input type="hidden" name="FallColorJS" id="FallColorJS" value="">
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="SunShade">Sun / Shade</label>
+                  <select class="pf-ctrl pf-ctrl-full" name="SunShade" id="SunShade">
+                    <option value="" selected>—</option>
+                    <option value="full sun">Full Sun</option>
+                    <option value="partial shade">Part Shade</option>
+                    <option value="shade">Shade</option>
+                  </select>
+                </div>
+
+                <div class="pf-field">
+                  <label class="pf-field-label" for="Moisture">Soil Moisture</label>
+                  <select class="pf-ctrl pf-ctrl-full" name="Moisture" id="Moisture">
+                    <option value="" selected>—</option>
+                    <option value="average">Average</option>
+                    <option value="wet">Wet</option>
+                    <option value="dry">Dry</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="pf-submit">
+              <input type="reset"  name="Reset"  value="Reset"  id="NetPSReset">
+              <input type="submit" name="Submit" value="Search" id="NetPSSubmit">
+            </div>
+          </div>
+        </form>
+
+        <p class="pf-note">
+          Results open on our plant database &mdash;
+          <a href="https://plants.sherwoodnurseries.ca/11050022/List" target="_blank" rel="noopener">browse all plants</a>
+          or <a href="https://plants.sherwoodnurseries.ca/11050022/Help/NetPS" target="_blank" rel="noopener">get search tips</a>.
+        </p>
+
+      </div>
+    </section>
+
   </main>
 
   <footer id="site-footer">
@@ -142,6 +621,11 @@
   </footer>
 
   <a href="#" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-circle-up"></i></a>
+
+  <!-- NetPS script: provides clearCat() and colorSelect palette feature -->
+  <script src="https://plants.sherwoodnurseries.ca/Scripts/NetPSMaster.js"></script>
+  <!-- Override the DOM layout function — CSS Grid handles our layout instead -->
+  <script>function reWidthSetup() {}</script>
   <script src="main.js"></script>
 </body>
 </html>
