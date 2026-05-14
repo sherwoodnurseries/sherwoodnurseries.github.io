@@ -6,15 +6,15 @@
   "facebookUrl": "https://www.facebook.com/sherwoodnurseries/",
   "instagramUrl": "https://www.instagram.com/sherwoodnurseries/",
   "hours": {
-    "monday": "9 AM - 5 PM",
+    "monday": "10 AM - 3 PM Holiday Hours",
     "tuesday": "9 AM - 5 PM",
     "wednesday": "9 AM - 5 PM",
-    "thursday": "9 AM - 5 PM",
-    "friday": "9 AM - 6 PM",
-    "saturday": "10 AM - 5 PM",
+    "thursday": "9 AM - 5 PM CLOSED",
+    "friday": "9 AM - 6 PM CLOSED",
+    "saturday": "10 AM - 5 PM CLOSED",
     "sunday": "10 AM - 3 PM"
   },
-  "seasonNote": "Opening May 8, 2026",
+  "seasonNote": "Closed May 14-16 due to inclement weather",
   "holidayMessage": "",
   "promoMessage": ""
 }
