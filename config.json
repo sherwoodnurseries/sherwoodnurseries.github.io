@@ -14,7 +14,7 @@
     "saturday": "closed",
     "sunday": "closed",
   },
-  "seasonNote": "due to all the rain june 20th and 21st we will be closed"
+  "seasonNote": "",
   "holidayMessage": "",
-  "promoMessage": ""
+  "promoMessage": "",
 }
