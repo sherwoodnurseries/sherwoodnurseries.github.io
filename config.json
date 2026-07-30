@@ -12,9 +12,9 @@
     "thursday": "9 AM - 5 PM",
     "friday": "9 AM - 6 PM",
     "saturday": "closed",
-    "sunday": "closed",
+    "sunday": "closed"
   },
   "seasonNote": "",
   "holidayMessage": "",
-  "promoMessage": "",
+  "promoMessage": ""
 }
